@@ -19,7 +19,7 @@ const Gamebox = () => {
   const [error, setError] = useState(""); // Added for error handling
 
   const videoRef = useRef(null);
-  const contractAddress = "0x849b0BfA060CD83Dd9BD9Dfc0cB01e3aCB763D79"; // Replace with your contract address
+  const contractAddress = "0x849b0BfA060CD83Dd9BD9Dfc0cB01e3aCB763D79"; // แก้ตรงนี้
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
   const [contract, setContract] = useState(null);
@@ -60,7 +60,7 @@ const Gamebox = () => {
           localStorage.setItem("account", _accounts[0]);
 
           // เชื่อมต่อกับ smart contract
-          const _contract = new _web3.eth.Contract(
+          const _contract = new _web3.eth.Contract( // แก้ตั้งแต่ข้างล่าง
             [
               {
                 inputs: [],
