@@ -4,6 +4,7 @@ import { Web3Provider } from "@ethersproject/providers"; // เพิ่มก�
 
 const Navbar = () => {
   const [walletAddress, setWalletAddress] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // ใช้สถานะเพื่อควบคุมการแสดงผลของ modal
 
   useEffect(() => {
     // เช็คว่า MetaMask หรือ wallet อื่นๆ ถูกติดตั้งหรือไม่
@@ -23,6 +24,11 @@ const Navbar = () => {
     }
   }, []);
 
+  // ฟังก์ชันเปิด/ปิด modal
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <div className="items-center flex justify-center bg-red-950">
       <div className="container">
@@ -40,21 +46,43 @@ const Navbar = () => {
             </div>
           </div>
           <div className="content flex items-center">
-            <a
+            {/* ปรับขนาดปุ่ม "How to play" ให้เท่าเดิม */}
+            <button
+              onClick={toggleModal}
               className="m-6 p-3 bg-zinc-950 font-medium rounded-lg text-center"
-              href=""
-            >
-              Play 🎮
-            </a>
-            <a
-              className="p-3 bg-zinc-950 font-medium rounded-lg text-center"
-              href=""
             >
               How to play 💡
-            </a>
+            </button>
           </div>
         </div>
       </div>
+
+      {isModalOpen && (
+  <div className="modal modal-open">
+    <div className="modal-box text-white rounded-lg p-8">
+      <h2 className="text-3xl font-bold mb-4">How to Play</h2>
+      <p className="text-lg mb-4">
+        Follow these simple steps to get started:
+      </p>
+      <ol className="list-decimal list-inside text-lg space-y-2">
+        <li>Connect your wallet.</li>
+        <li>Deposit into your balance.</li>
+        <li>Click Start to Play.</li>
+        <li>Get your Reward (If you win).</li>
+      </ol>
+      <div className="modal-action justify-end">
+        <button
+          onClick={toggleModal}
+          className="btn btn-primary bg-red-950 hover:bg-red-800 text-white border-2 border-red-700 rounded-lg px-6 py-3 text-lg"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 };
